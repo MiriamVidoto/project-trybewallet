@@ -29,7 +29,7 @@ validateButton = () => {
     }, () => this.setState({ buttonDisabled: !this.validateButton() }));
   };
 
-  handleButton = () => {
+  handleClick = () => {
     const { history, loginDispatch } = this.props;
     const { email } = this.state;
     loginDispatch(email);
@@ -67,7 +67,7 @@ validateButton = () => {
         <button
           type="button"
           disabled={ buttonDisabled }
-          onClick={ this.handleButton }
+          onClick={ this.handleClick }
         >
           Entrar
         </button>
