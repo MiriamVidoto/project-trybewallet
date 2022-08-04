@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 class Header extends Component {
   render() {
     const { userEmail, expenses } = this.props;
-    const totalExpenses = expenses.reduce((total, newExpense) => (
-      total
-      + Number(newExpense.value)
-      * Number(newExpense.exchangeRates[newExpense.currency].ask)
+    const totalExpenses = expenses.reduce((acc, crr) => (
+      acc + (Number(crr.value) * Number(crr.exchangeRates[crr.currency].ask))
     ), 0);
+
     return (
       <div>
         <span data-testid="email-field">

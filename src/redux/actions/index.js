@@ -8,6 +8,21 @@ export const expenseAction = (expenseData) => ({
   expenseData,
 });
 
+export const newExpensesAction = (newExpensesData) => ({
+  type: 'NEW_DATA_EXPENSES',
+  newExpensesData,
+});
+
+export const editAction = (id) => ({
+  type: 'EDIT_EXPENSE',
+  id,
+});
+
+export const endEditAction = (newExpenses) => ({
+  type: 'END_EDIT_EXPENSE',
+  newExpenses,
+});
+
 export const fetchCurrencies = () => async (dispatch) => {
   const response = await fetch('https://economia.awesomeapi.com.br/json/all');
   const data = await response.json();

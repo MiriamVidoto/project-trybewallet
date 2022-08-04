@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { expenseAction, fetchCurrencies, fetchCurrencyQuotes } from '../redux/actions';
+import { expenseAction,
+  fetchCurrencies,
+  fetchCurrencyQuotes } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -12,6 +14,8 @@ class WalletForm extends Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
       description: '',
+      id: -1,
+      exchangeRates: {},
     };
   }
 
@@ -28,13 +32,13 @@ class WalletForm extends Component {
   }
 
   handleClick = async () => {
-    const { expenses, getCurrenciesQuotes } = this.props;
+    const { getCurrenciesQuotes } = this.props;
     await getCurrenciesQuotes();
     const { quotes } = this.props;
-    this.setState({
-      id: expenses.length,
+    this.setState((prevState) => ({
+      id: prevState.id + 1,
       exchangeRates: quotes,
-    }, () => {
+    }), () => {
       const { expenseDispatch } = this.props;
       expenseDispatch(this.state);
       this.setState({
@@ -45,8 +49,8 @@ class WalletForm extends Component {
   }
 
   render() {
-    const { value, currency, method, tag, description } = this.state;
     const { currencies } = this.props;
+    const { value, currency, method, tag, description } = this.state;
     const methods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
     const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
@@ -127,6 +131,7 @@ class WalletForm extends Component {
           >
             Adicionar despesa
           </button>
+
         </form>
       </div>
     );
@@ -137,8 +142,7 @@ WalletForm.propTypes = {
   expenseDispatch: PropTypes.func.isRequired,
   getCurrencies: PropTypes.func.isRequired,
   getCurrenciesQuotes: PropTypes.func.isRequired,
-  quotes: PropTypes.objectOf(PropTypes.string).isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  quotes: PropTypes.objectOf(PropTypes.object).isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
@@ -150,7 +154,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (store) => ({
   currencies: store.wallet.currencies,
-  expenses: store.wallet.expenses,
   quotes: store.wallet.quotes,
 });
 
