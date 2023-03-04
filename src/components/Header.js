@@ -10,18 +10,22 @@ class Header extends Component {
     ), 0);
 
     return (
-      <div>
-        <span data-testid="email-field">
-          { `Email: ${userEmail}` }
-        </span>
-        <span>Despesa total:</span>
-        <span data-testid="total-field">
-          { totalExpenses.toFixed(2) }
-        </span>
-        <span data-testid="header-currency-field">
-          BRL
-        </span>
-      </div>
+      <header>
+        <h1>TrybeWallet</h1>
+        <div className="header-data">
+          <span data-testid="email-field">
+            { userEmail }
+          </span>
+          <div>
+            <span data-testid="total-field">
+              { `Despesa total: ${totalExpenses.toFixed(2)} ` }
+            </span>
+            <span data-testid="header-currency-field">
+              BRL
+            </span>
+          </div>
+        </div>
+      </header>
     );
   }
 }

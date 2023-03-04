@@ -39,8 +39,8 @@ validateButton = () => {
   render() {
     const { email, password, buttonDisabled } = this.state;
     return (
-      <div>
-        <h1>Login</h1>
+      <div className="login">
+        <h1>LOGIN</h1>
         <label htmlFor="email">
           Email:
           <input

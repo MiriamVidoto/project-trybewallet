@@ -20,7 +20,7 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <div>
+      <div className="expenses-table">
         <table>
           <thead>
             <tr>
